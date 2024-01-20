@@ -1,0 +1,10 @@
+h2, .title {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+
+.character {
+    display: inline-block;
+    margin-right: -0.05em;
+}

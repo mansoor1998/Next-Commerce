@@ -1,0 +1,8 @@
+.thumb-swiper .swiper-slide-thumb-active {
+    @apply border border-blue-400;
+}
+
+
+/* .main-swiper .swiper-wrapper .swiper-slide-active +  {
+    border: 1px solid black;
+} */
