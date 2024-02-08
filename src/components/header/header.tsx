@@ -19,13 +19,14 @@ export default function Header() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([
     new MenuItem('Home', '', '/shop'),
     new MenuItem('Shop', '', '/shop/collections'),
-    new MenuItem('Products', '', '', [
-      new MenuItem('Apple', '', '/shop/collections?brand=apple'),
-      new MenuItem('Sony', '', '/shop/collections?brand=sony'),
-      new MenuItem('Meta', '', '/shop/collections?brand=meta'),
-      new MenuItem('Microsoft', '', '/shop/collections?brand=microsoft')
-    ]),
+    // new MenuItem('Products', '', '', [
+    //   new MenuItem('Apple', '', '/shop/collections?brand=apple'),
+    //   new MenuItem('Sony', '', '/shop/collections?brand=sony'),
+    //   new MenuItem('Meta', '', '/shop/collections?brand=meta'),
+    //   new MenuItem('Microsoft', '', '/shop/collections?brand=microsoft')
+    // ]),
     new MenuItem('Contact Us', '', '/shop/contact-us'),
+    new MenuItem('Blogs', '' , '/') // this will have the blogging values, not necessary to add this though.
   ]);
 
   const pathName = usePathname();

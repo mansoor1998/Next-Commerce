@@ -1,12 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-      appDir: true,
-    },
     images: {
       domains: ['i.postimg.cc']
-    }
+    },
     //output: "standalone",
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/shop',
+          permanent: true
+        }
+      ]
+    }
   };
   
   module.exports = nextConfig;

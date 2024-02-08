@@ -1,15 +1,18 @@
 "use client"
 
-export default function Product() {
+import { ProductModel } from "@/models/Products.model";
+
+export default function Product({
+    product
+}: { product: ProductModel }) {
     return (
         <div className="relative overflow-hidden rounded-lg bg-white shadow-md transition-all top-0 hover:-top-2 duration-100">
             <a href="">
-                <img className="rounded-t-lg object-cover" src="https://storeganjiswag.com/cdn/shop/files/ee49fa24f55d5ac5aa79bf7761483b2a_0d1cb96d-a76a-4703-82c5-73c803bcf116_533x.jpg?v=1703864344" alt="product image" />
+                <img className="rounded-t-lg object-cover" src={product?.images?.edges?.at(0)?.node.originalSrc} alt={product?.images?.edges?.at(0)?.node.altText} />
             </a>
-            {/* <span className="absolute top-0 left-0 w-28 translate-y-4 -translate-x-6 -rotate-45 bg-black text-center text-sm text-white">Sale</span> */}
             <div className="mt-4 px-5 pb-5">
                 <a href="">
-                    <h5 className="text-xl font-semibold tracking-tight text-slate-900">Playstation 5</h5>
+                    <h5 className="text-xl font-semibold tracking-tight text-slate-900">{product?.title}</h5>
                 </a>
                 <div className="flex items-center justify-between">
                     <p>

@@ -1,7 +1,55 @@
 import { Product, Slider } from "@/components";
 import ObjectID from "bson-objectid";
+import { useQuery, gql } from '@apollo/client';
+import client from "@/apollo-client";
+import { GraphqlModel } from "@/models/Graphql.model";
+import { ProductModel } from "@/models/Products.model";
+import createApolloClient from "@/apollo-client";
 
-export default function ShopPage() {
+
+const GET_PRODUCT_DATA = gql`
+    query {
+        products(first: 6, reverse: true) {
+            edges {
+                node {
+                        id
+                        title
+                        handle
+                        images(first: 6) {
+                            edges {
+                                node {
+                                originalSrc
+                                altText
+                                }
+                            }
+                        }
+                        resourcePublicationOnCurrentPublication {
+                            publication {
+                                name
+                                id
+                            }
+                            publishDate
+                            isPublished
+                        }
+                }
+            }
+        }    
+    }
+`;
+
+
+export default async function ShopPage() {
+
+   const client = createApolloClient();
+
+    const { data } = await client.query({
+        query: GET_PRODUCT_DATA
+    });
+
+    const porductData = (data as GraphqlModel<ProductModel>)['products']?.edges?.map(x => x.node);
+
+    console.log(porductData.at(0)?.images.edges.at(0));
+
     return (
         <>
             <main className="overflow-hidden">
@@ -19,12 +67,11 @@ export default function ShopPage() {
                             </p>
 
                             <div className="grid md:grid-cols-3 md:gap-3 sm:grid-cols-2 sm:gap-2 my-5">
-                                <Product />
-                                <Product />
-                                <Product />
-                                <Product />
-                                <Product />
-                                <Product />
+                                {
+                                    porductData.map(
+                                        p => <Product product={p} />
+                                    )
+                                }
                             </div>
                         </div>
 
@@ -65,12 +112,13 @@ export default function ShopPage() {
                             </p>
 
                             <div className="grid md:grid-cols-3 md:gap-3 sm:grid-cols-2 sm:gap-2 my-5">
-                                <Product />
-                                <Product />
-                                <Product />
-                                <Product />
-                                <Product />
-                                <Product />
+                                <Product product={{
+                                    description:"",
+                                    handle: "",
+                                    id: "",
+                                    images: null,
+                                    title: ""
+                                }} />
                             </div>
                         </div>
 
